@@ -1,0 +1,42 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GraphicsQualitySettings : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+    /*--------------------------------------------------
+    * This method will set the graphic quality of the 
+    * game to its highest value.
+    * -----------------------------------------------*/
+    public void UltraQuality()
+    {
+        QualitySettings.currentLevel = QualityLevel.Fantastic;
+        
+    }
+
+    public void HighQuality()
+    {
+        QualitySettings.currentLevel = QualityLevel.Beautiful;
+    }
+
+    public void MediumQuality()
+    {
+        QualitySettings.currentLevel = QualityLevel.Good;
+    }
+
+    public void LowQuality()
+    {
+        QualitySettings.currentLevel = QualityLevel.Fast;
+    }
+
+}
