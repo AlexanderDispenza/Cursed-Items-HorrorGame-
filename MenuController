@@ -1,0 +1,82 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MenuController : MonoBehaviour {
+
+    // Variables to determine if the exit window is open or closed
+    public bool exitOpen = false;
+    public Canvas exitConfirmationWindow;
+
+    // Variables to determine if the settings window is open or closed
+    public Canvas settingsWindow;
+    public bool settingsOpen = false;
+
+
+    // Use this for initialization
+    void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+
+    /*--------------------------------------------------
+     * This method will load a scene 
+     * -----------------------------------------------*/
+    public void StartGame()
+    {
+        Application.LoadLevel("GameWorld");
+    }
+
+    /*--------------------------------------------------
+    * This method will close the application
+    * -----------------------------------------------*/
+   public void StopGame()
+    {
+        Application.Quit();
+    }
+
+    /*--------------------------------------------------
+    * This method will bring up a confirmation window 
+    * prompting the user if they want to close the 
+    * application.
+    * -----------------------------------------------*/
+    public void ExitCanvis()
+    {
+        if (exitOpen == false)
+        {
+            exitOpen = true;
+            exitConfirmationWindow.enabled = true;
+            settingsOpen = false;
+            settingsWindow.enabled = false;
+
+        }
+        else if (exitOpen == true)
+        {
+            exitOpen = false;
+            exitConfirmationWindow.enabled = false;
+           
+        }
+    }
+
+    public void SettingsCanvis()
+    {
+        if (settingsOpen == false)
+        {
+            settingsOpen = true;
+            settingsWindow.enabled = true;
+            exitOpen = false;
+            exitConfirmationWindow.enabled = false;
+
+        }
+        else if (settingsOpen == true)
+        {
+            settingsOpen = false;
+            settingsWindow.enabled = false;
+
+        }
+    }
+}
