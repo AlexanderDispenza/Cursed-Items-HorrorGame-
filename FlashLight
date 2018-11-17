@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FlashLight : MonoBehaviour {
+
+    public Light flashLight;
+    public GameObject flashLightOnAudio;
+    public GameObject flashLightOffAudio;
+
+    // Use this for initialization
+    void Start ()
+    {
+        // on game start disable the flashlight
+        flashLight.enabled = false;
+	}
+	
+	// Update is called once per frame
+	void Update ()
+    {
+        // checks if the player presses the f key
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            // checks if the flash light is disabled 
+            if (flashLight.enabled == false)
+            {
+                // enable the flashlight and play flashlight on sound effect
+                flashLight.enabled = true;
+                flashLightOnAudio.GetComponent<AudioSource>().Play();
+            }
+            else
+            {
+                // flash light will be disabled and play flashlight off sound effect
+                flashLight.enabled = false;
+                flashLightOnAudio.GetComponent<AudioSource>().Play();
+            }
+        }
+	}
+}
