@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SoundTrigger : MonoBehaviour {
+
+    public AudioClip SoundEffect;
+    bool isBeingPlayed = false;
+    bool played = false;
+
+    public void OnTriggerStay(object BoxCollider)
+    {
+        if (played == false && Input.GetKeyDown(KeyCode.E))
+        {
+            playSound();
+            played = true;
+        }
+    }
+
+    public void playSound()
+    {
+        // gets the audio file of crow sound effect and plays it. 
+        GetComponent<AudioSource>().PlayOneShot(SoundEffect);
+        isBeingPlayed = false;
+    }
+
+}
