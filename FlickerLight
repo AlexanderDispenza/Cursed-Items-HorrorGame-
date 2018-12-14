@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FlickerLight : MonoBehaviour {
+
+    public Light lightSource; // light object 
+
+    // minamaum and maximum values for when the light flickers 
+    public float minInterval; 
+    public float maxInterval;
+    public float timer;
+
+	// Use this for initialization
+	void Start ()
+    {
+        timer = Random.Range(minInterval, maxInterval);
+	}
+	
+	// Update is called once per frame
+	void Update ()
+    {
+        LightFlicker();
+	}
+
+    public void LightFlicker()
+    {
+        // decrease the timer countdown
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+        }
+
+        // when timer is less than 0 
+        if (timer <= 0)
+        {
+            // light source will disable
+            lightSource.enabled = !lightSource.enabled;
+
+            // timer is set back to arandom number
+            timer = Random.Range(minInterval, maxInterval);
+        }
+    }
+}
+
