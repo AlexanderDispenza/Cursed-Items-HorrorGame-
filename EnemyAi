@@ -1,0 +1,74 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class EnemyAi : MonoBehaviour {
+
+    private Animator enemyAnimator;
+    private NavMeshAgent enemyAgent;
+
+    public Transform playerTarget;
+
+    public bool followPlayer = true;
+    public float stopingDist = 3.0f;
+    public float attackDelay = 1.5f;
+
+    private float attackCoolDown;
+    private float distBetweenPlayer;
+
+	// Use this for initialization
+	void Start ()
+    {
+        // need to make a refrence to our NavMeshAgent
+        enemyAgent = GetComponent<NavMeshAgent>();
+        enemyAnimator = GetComponent<Animator>();
+        enemyAgent.stoppingDistance = stopingDist;
+        attackCoolDown = Time.time;
+	}
+	
+	// Update is called once per frame
+	void Update ()
+    {
+        FollowPlayer();    
+	}
+
+    // this function will make our enemy follow our player. Once it has reached a certian distance, his attack animation will play.
+    void FollowPlayer()
+    {
+        distBetweenPlayer = Vector3.Distance(playerTarget.position, transform.position);
+
+        if (distBetweenPlayer >= stopingDist)
+        {
+            followPlayer = true;
+        }
+        else
+        {
+            followPlayer = false;
+            AttackPlayer();
+        }
+
+        if (followPlayer == true)
+        {
+            enemyAgent.SetDestination(playerTarget.position);
+            enemyAnimator.SetBool("isRunning", true);
+        }
+        else
+        {
+            enemyAnimator.SetBool("isRunning", false);
+        }
+
+    }
+
+    // this function is a cooldown timer between how often the enemy can hit the player.
+    void AttackPlayer()
+    {
+        if (Time.time > attackCoolDown)
+        {
+            Debug.Log("Attack!");
+            enemyAnimator.SetTrigger("Attack");
+            attackCoolDown = Time.time + attackDelay;
+        }
+    }
+
+}
