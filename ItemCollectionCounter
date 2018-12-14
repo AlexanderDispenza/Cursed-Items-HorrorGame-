@@ -1,0 +1,36 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ItemCollectionCounter : MonoBehaviour {
+
+    public int items = 0;
+    public int winCondition = 4;
+
+    // when the player is within range of the item, the number of items they have will be increased. 
+     void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "CursedItem")
+        {
+            items++;
+            Destroy(other.gameObject);
+        }
+    }
+
+     void OnGUI()
+    {
+
+        if (items < winCondition)
+        {
+            // will display on the top of the screen the amount of items the player has
+            GUI.Box(new Rect((Screen.width / 2) - 100, 10, 200, 35), "" + items + " Items collected");
+        }
+        else
+        {
+            // when the player has collected all the items it will display the winning message
+            GUI.Box(new Rect((Screen.width / 2) - 100, 10, 200, 35), "All items have been collected!");
+        }
+    }
+
+}
